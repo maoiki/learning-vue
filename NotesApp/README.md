@@ -20,3 +20,15 @@ This project consists in a place to create personal notes
 <img src="https://github.com/maoiki/learning-vue/blob/main/.github/notes-delete.gif?raw=true" alt="Delete note" width="500">
 
 - Default note card, when no notes are created yet
+
+## How to run
+```bash
+# Clone the repository
+$ git clone https://github.com/maoiki/learning-vue.git
+# Enter the NotesApp folder
+$ cd notesapp
+# Install the dependencies (using npm or yarn)
+$ npm install || yarn install 
+# Run the app (using npm or yarn)
+$ npm run dev || yarn dev 
+```
