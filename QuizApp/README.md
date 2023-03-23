@@ -23,3 +23,15 @@ This project consists of a page with several quizzes to be taken, and at the end
 <img src="https://github.com/maoiki/learning-vue/blob/main/.github/quiz-404error.gif?raw=true" alt="404 error page" width="500">
 
 - Search message when there are no results
+
+## How to run
+```bash
+# Clone the repository
+$ git clone https://github.com/maoiki/learning-vue.git
+# Enter the QuizApp folder
+$ cd quizapp
+# Install the dependencies (using npm or yarn)
+$ npm install || yarn install 
+# Run the app (using npm or yarn)
+$ npm run dev || yarn dev 
+```
