@@ -1,6 +1,6 @@
 # 🔢 CounterApp
 
-My first project in Vue.js to acquire the basic knowledge of this framework.
+My first project in Vue.js, to acquire the basic knowledge of this framework.
 The CounterApp basically consists of a counter that we can control with two simple buttons.
 
 ## Learned about: 
