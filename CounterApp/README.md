@@ -1,5 +1,15 @@
-# CounterApp
+# 🔢 CounterApp
 
-Primeiro projeto em Vue.js para adquirir os conhecimentos básicos desse framework.
+My first project in Vue.js to acquire the basic knowledge of this framework.
+The CounterApp basically consists of a counter that we can control with two simple buttons.
 
-O CounterApp consiste basicamente em um contador que podemos controlar por meio de dois simples botões.
+## Learned about: 
+- How to create a Vue application
+- Composition API vs Option API
+- States 
+- Event handlers
+
+## Feature:
+- Manipulate counter
+<img src="https://github.com/maoiki/learning-vue/blob/main/.github/counter.gif?raw=true" alt="CounterApp" width="500">
+
