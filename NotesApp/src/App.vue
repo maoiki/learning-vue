@@ -10,64 +10,93 @@ const randomBackgroundColor = () => {
   return "hsl(" + (Math.random() * 360) + ", 75%, 75%"
 }
 
+const resetModal = () => {
+  showModal.value = false;
+  newNote.value = "";
+  errorMessage.value = "";
+}
+
 const addNote = () => {
-  // validação básica para que não seja criada uma nota vazia
   if(!newNote.value.length){
-    errorMessage.value = "Campo não pode estar vazio."
+    errorMessage.value = "Field cannot be empty."
     return
   }
+  else{
     notes.value.push({
-      // para gerar um id único usarei Date.now() por servir para o caso, mas provavelmente um UUID se sairia melhor em algumas situações
+
       id: Date.now(),
       text: newNote.value,
       date: new Date(),
       bgColor: randomBackgroundColor()
     });
-    // esse pedaço em essência só sai "resetando" tudo, certamente existe alguma forma mais elegante de implementar isso
-    showModal.value = false;
-    newNote.value = "";
-    errorMessage.value = "";
-  
+
+    resetModal()
+  }
 }
+const removeNote = (index) => {
+  console.log(index)
+  notes.value.splice(index, 1)
+};
 </script>
 
 <template>
 <main>
-  {{ notes }}
   <div v-if="showModal" class="overlay">
     <div class="modal">
-      <button class="close" @click="showModal = false"> X </button>
+      <h2>Write your note here: </h2>
       <textarea v-model.trim="newNote" name="note" id="note" cols="20" rows="10"></textarea>
       <p class="invalid" v-if="errorMessage"> {{ errorMessage }}</p>
-      <button class="add_note" @click="addNote"> Add note </button>
+      <div class="buttons-container">
+        <button class="button-add" @click="addNote"> Add note </button>
+        <button class="button-cancel" @click="resetModal"> Cancel </button>
+      </div>
     </div>
   </div>
 
   <div class="container">
     <header>
       <h1>Notes </h1>
-      <button class="header_button" @click="showModal = true">+</button>
+      <button class="header-button" @click="showModal = true">+</button>
     </header>
     <div class="cards-container">
-      <div 
-        v-for="note in notes" 
+      <div
+        v-if="notes.length > 0" 
+        v-for="note, index in notes" 
         class="card" 
         :style="{backgroundColor: note.bgColor}"
         :key="note.id"
         >
         <p class="main-text"> {{note.text}} </p>
-        <p class="date"> {{note.date.toLocaleDateString('pt-br')}} </p>
+        <div class="card-bottom">
+          <p class="date"> {{note.date.toLocaleDateString('pt-br')}} </p>
+          <span class="delete" @click="removeNote(index)">🗑️</span>
+        </div>
+      </div>
+      <div v-else class="card">
+        <p class="main-text"> Hi, this is a default note! Write your own by clicking on the + button to your right :)</p>
       </div>
     </div>
   </div>
 </main>
+<footer><a class="link_externo" href="https://github.com/maoiki" target="_blank">Made with ♥ by Julio Duarte</a> </footer>
 </template>
 
 <style scoped>
-  main {
-    height: 100vh;
+
+  main{
     width: 100vw;
+    height: 100vh;
   }
+
+  footer{
+    position:fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    text-align: center;
+    padding:10px;
+    background-color: #41b883;
+    }
   .container {
     max-width: 1000px;
     padding: 10px;
@@ -84,13 +113,17 @@ const addNote = () => {
     margin-bottom: 25px;
     font-size: 75px;
   }
-  .header_button {
+  a {
+    text-decoration: none;
+    color: var(--color-text);
+  }
+  .header-button {
     border: none;
     padding: 10px;
     width: 50px;
     height: 50px;
     cursor: pointer;
-    background-color: hsla(160, 100%, 37%, 1);
+    background-color: #41b883;
     border-radius: 1000px;
     color: white;
     font-size: 20px;
@@ -99,7 +132,6 @@ const addNote = () => {
   .card {
     width: 225px;
     height: 225px;
-    background-color: rgb(237, 182, 44);
     padding: 10px;
     border-radius: 15px;
     display: flex;
@@ -107,6 +139,12 @@ const addNote = () => {
     justify-content: space-between;
     margin-right: 20px;
     margin-bottom: 20px;
+    background-color: #41b883;
+  }
+  .card-bottom{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
   }
   .main-text {
     line-height: 1.25;
@@ -114,7 +152,7 @@ const addNote = () => {
     font-weight: bold;
   }
   .date {
-    font-size: 12.5px;
+    font-size: 15px;
     margin-top: auto;
   }
   .overlay {
@@ -139,16 +177,44 @@ const addNote = () => {
     display: flex;
     flex-direction: column;
   }
-  .add_note {
+  .buttons-container{
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+  }
+  .button-add {
     padding: 10px 20px;
     font-size: 20px;
-    width: 100%;
-    background-color: hsla(160, 100%, 37%, 1);
+    width: fit-content;
+    background-color: #41b883;
     border: none;
     color: white;
     cursor: pointer;
     margin-top: 15px;
     border-radius: 15px;
+  }
+  .button-cancel {
+    padding: 10px 20px;
+    font-size: 20px;
+    width: fit-content;
+    border:none;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    margin-top: 15px;
+    border-radius: 15px;
+    background-color: rgb(182, 190, 188);
+  }
+
+  .delete{
+    display: flex;
+    font-size: 15px;
+    cursor: pointer;
+    background-color: rgba(255, 255, 255, 0.753);
+    border-radius: 50px;
+    height: 30px;
+    width: 30px;
+    justify-content: center;
+    align-items: center;
   }
   .invalid {
     margin-left: auto;
@@ -162,8 +228,13 @@ const addNote = () => {
     height: 200px;
     padding: 5px;
     font-size: 20px;
-    border-radius: 2px;
+    
     resize: none
+  }
+
+  textarea:focus{
+    outline: none;
+    border-color:#41b883;
   }
 
   .cards-container {

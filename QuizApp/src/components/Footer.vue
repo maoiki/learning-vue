@@ -1,5 +1,5 @@
 <template>
-  <footer><a class="link_externo" href="https://github.com/maoiki" target="_blank">Feito com ♥ por  Julio Duarte</a> </footer>
+  <footer><a class="link_externo" href="https://github.com/maoiki" target="_blank">Made with ♥ by Julio Duarte</a> </footer>
 </template>
 
 <style scoped>

@@ -18,12 +18,13 @@ const subtractFromCounter = () => {
       <p> {{ count }}</p>
       <button @click="subtractFromCounter">-</button>
       <button @click="addToCounter">+</button>
-      <footer><a class="link_externo" href="https://github.com/maoiki" target="_blank">Feito com ♥ por  Julio Duarte</a></footer>
+      <footer><a class="link_externo" href="https://github.com/maoiki" target="_blank">Made with ♥ by Julio Duarte</a></footer>
     </div>
   </main>
 </template>
 
 <style scoped>
+
   .main_content {
     height: 100vh;
     display: flex;
